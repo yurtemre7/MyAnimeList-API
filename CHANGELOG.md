@@ -1,3 +1,9 @@
+## 1.0.0
+
+* Add Null Safety
+* Add Flutter 3 Support
+* Fix null values from MAL API according to the [api documentation](https://myanimelist.net/apiconfig/references/api/v2).
+
 ## 0.3.0
 
 * Add `getUserInfo` method.

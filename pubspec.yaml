@@ -1,7 +1,7 @@
 name: myanimelist_api
-version: 0.3.0
+version: 1.0.0
 description: Asynchronous API wrapper for the official MyAnimeList API v2.
-repository: https://github.com/rsktg/MyAnimeList-API
+repository: https://github.com/yurtemre7/MyAnimeList-API
 
 environment:
   sdk: '>=3.0.0 <4.0.0'
