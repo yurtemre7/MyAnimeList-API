@@ -12,7 +12,7 @@ import 'package:myanimelist_api/myanimelist_api.dart';
 
 void main() async {
   // Initialize client
-  var client = Client("YOUR_ACCESS_TOKEN");
+  var client = Client(accessToken: "", clientToken: "");
 }
 ```
 
