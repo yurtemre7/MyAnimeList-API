@@ -23,7 +23,7 @@ part 'broadcast.g.dart';
 @JsonSerializable(createToJson: false, fieldRename: FieldRename.snake)
 class Broadcast {
   final String dayOfTheWeek;
-  final String startTime;
+  final String? startTime;
 
   Broadcast(this.dayOfTheWeek, this.startTime);
 

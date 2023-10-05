@@ -30,7 +30,7 @@ class User {
   final String location;
 
   @JsonKey(fromJson: stringToDate)
-  final DateTime joinedAt;
+  final DateTime? joinedAt;
 
   final AnimeStatistics animeStatistics;
 

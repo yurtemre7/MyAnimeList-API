@@ -6,10 +6,9 @@ part of 'alternative_titles.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-AlternativeTitles _$AlternativeTitlesFromJson(Map<String, dynamic> json) {
-  return AlternativeTitles(
-    (json['synonyms'] as List)?.map((e) => e as String)?.toList(),
-    json['en'] as String,
-    json['ja'] as String,
-  );
-}
+AlternativeTitles _$AlternativeTitlesFromJson(Map<String, dynamic> json) =>
+    AlternativeTitles(
+      (json['synonyms'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      json['en'] as String?,
+      json['ja'] as String?,
+    );

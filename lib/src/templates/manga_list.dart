@@ -37,17 +37,18 @@ class MangaListTemplate {
   final String tags;
   final String comments;
 
-  MangaListTemplate(
-      {this.status,
-      this.isRereading = false,
-      this.score,
-      this.numVolumesRead = 0,
-      this.numChaptersRead = 0,
-      this.priority = 0,
-      this.numTimesReread = 0,
-      this.rereadValue = 0,
-      this.tags = "",
-      this.comments = ""});
+  MangaListTemplate({
+    required this.status,
+    this.isRereading = false,
+    required this.score,
+    this.numVolumesRead = 0,
+    this.numChaptersRead = 0,
+    this.priority = 0,
+    this.numTimesReread = 0,
+    this.rereadValue = 0,
+    this.tags = "",
+    this.comments = "",
+  });
 
   /// Returns map for encoding as form fields.
   Map<String, String> toMap() {

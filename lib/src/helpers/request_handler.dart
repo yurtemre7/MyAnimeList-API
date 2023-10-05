@@ -23,7 +23,7 @@ import '../exceptions.dart';
 
 /// Handles all requests to the API.
 class RequestHandler {
-  http.Client _client;
+  late http.Client _client;
   String baseUrl;
   Map<String, String> headers;
 
@@ -31,12 +31,13 @@ class RequestHandler {
     _client = http.Client();
   }
 
-  Future<dynamic> call(
-      {String uri,
-      String method = "get",
-      Map<String, String> params,
-      Map<String, String> body}) async {
-    var finalUrl = "$baseUrl$uri${Uri(queryParameters: params)}";
+  Future<dynamic> call({
+  required  String uri,
+    String method = "get",
+    Map<String, String>? params,
+    Map<String, String>? body,
+  }) async {
+    var finalUrl = Uri.parse("$baseUrl$uri${Uri(queryParameters: params)}");
     if (method == "get") {
       var response = await _client.get(finalUrl, headers: headers);
       var json = jsonDecode(response.body);
@@ -48,8 +49,7 @@ class RequestHandler {
         throw ApiException(response.statusCode, message, error);
       }
     } else if (method == "patch") {
-      var response =
-          await _client.patch(finalUrl, headers: headers, body: body);
+      var response = await _client.patch(finalUrl, headers: headers, body: body);
       var json = jsonDecode(response.body);
       if (response.statusCode == 200) {
         return true;

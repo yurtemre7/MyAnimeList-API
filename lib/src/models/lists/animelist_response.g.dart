@@ -6,11 +6,9 @@ part of 'animelist_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-AnimeListResponse _$AnimeListResponseFromJson(Map<String, dynamic> json) {
-  return AnimeListResponse(
-    (json['data'] as List)
-        ?.map((e) =>
-            e == null ? null : AnimeList.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-  );
-}
+AnimeListResponse _$AnimeListResponseFromJson(Map<String, dynamic> json) =>
+    AnimeListResponse(
+      (json['data'] as List<dynamic>)
+          .map((e) => AnimeList.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );

@@ -6,9 +6,7 @@ part of 'start_season.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-StartSeason _$StartSeasonFromJson(Map<String, dynamic> json) {
-  return StartSeason(
-    json['year'] as int,
-    json['season'] as String,
-  );
-}
+StartSeason _$StartSeasonFromJson(Map<String, dynamic> json) => StartSeason(
+      json['year'] as int,
+      json['season'] as String,
+    );

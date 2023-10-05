@@ -6,11 +6,7 @@ part of 'author.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Author _$AuthorFromJson(Map<String, dynamic> json) {
-  return Author(
-    json['node'] == null
-        ? null
-        : AuthorNode.fromJson(json['node'] as Map<String, dynamic>),
-    json['role'] as String,
-  );
-}
+Author _$AuthorFromJson(Map<String, dynamic> json) => Author(
+      AuthorNode.fromJson(json['node'] as Map<String, dynamic>),
+      json['role'] as String,
+    );

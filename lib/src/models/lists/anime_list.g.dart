@@ -6,14 +6,7 @@ part of 'anime_list.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-AnimeList _$AnimeListFromJson(Map<String, dynamic> json) {
-  return AnimeList(
-    json['node'] == null
-        ? null
-        : Node.fromJson(json['node'] as Map<String, dynamic>),
-    json['list_status'] == null
-        ? null
-        : MyAnimeListStatus.fromJson(
-            json['list_status'] as Map<String, dynamic>),
-  );
-}
+AnimeList _$AnimeListFromJson(Map<String, dynamic> json) => AnimeList(
+      Node.fromJson(json['node'] as Map<String, dynamic>),
+      MyAnimeListStatus.fromJson(json['list_status'] as Map<String, dynamic>),
+    );

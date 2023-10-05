@@ -26,7 +26,7 @@ class MainPicture {
   final String medium;
 
   /// URL of large image.
-  final String large;
+  final String? large;
 
   MainPicture(this.medium, this.large);
 

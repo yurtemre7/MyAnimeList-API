@@ -35,11 +35,12 @@ class Client {
   /// Base URL for all requests.
   final String baseUrl = "https://api.myanimelist.net/v2/";
 
-  RequestHandler _handler;
-  Map<String, String> _headers;
+  late RequestHandler _handler;
+  late Map<String, String> _headers;
 
   /// See https://myanimelist.net/blog.php?eid=835707.
-  String accessToken;
+  final String accessToken;
+  final String clientToken;
 
   final Set<String> _animeFields = {
     "id",
@@ -136,16 +137,20 @@ class Client {
     "favorite"
   };
 
-  Client(this.accessToken) {
-    _headers = {'Authorization': 'Bearer $accessToken'};
+  /// Init client with empty access token if you don't have one.
+  /// ClientToken is required for public requests.
+  Client({required this.accessToken, required this.clientToken}) {
+    _headers = {
+      if (accessToken.isNotEmpty) 'Authorization': 'Bearer $accessToken',
+      'X-MAL-CLIENT-ID': clientToken,
+    };
     _handler = RequestHandler(baseUrl, _headers);
   }
 
   /// Returns list of [Node] objects based on [keyword].
   ///
   /// Max [limit] is 100.
-  Future<List<Node>> searchAnime(String keyword,
-      {int limit = 10, int offset = 0}) async {
+  Future<List<Node>> searchAnime(String keyword, {int limit = 10, int offset = 0}) async {
     var uri = "anime";
     var params = {'q': keyword, 'limit': '$limit', 'offset': '$offset'};
     var json = await _handler.call(uri: uri, params: params);
@@ -176,11 +181,7 @@ class Client {
     if (!_animeRankingTypes.contains(rankingType.toLowerCase())) {
       throw ArgumentError.value(rankingType, "rankingType");
     }
-    var params = {
-      'ranking_type': rankingType,
-      'limit': '$limit',
-      'offset': '$offset'
-    };
+    var params = {'ranking_type': rankingType, 'limit': '$limit', 'offset': '$offset'};
     var json = await _handler.call(uri: uri, params: params);
     var response = RankedResponse.fromJson(json);
     return response.data;
@@ -222,8 +223,7 @@ class Client {
   /// Returns list of [Node] objects based on [keyword].
   ///
   /// Max [limit] is 100.
-  Future<List<Node>> searchManga(String keyword,
-      {int limit = 10, int offset = 0}) async {
+  Future<List<Node>> searchManga(String keyword, {int limit = 10, int offset = 0}) async {
     var uri = "manga";
     var params = {'q': keyword, 'limit': '$limit', 'offset': '$offset'};
     var json = await _handler.call(uri: uri, params: params);
@@ -254,11 +254,7 @@ class Client {
     if (!_mangaRankingTypes.contains(rankingType.toLowerCase())) {
       throw ArgumentError.value(rankingType, "rankingType");
     }
-    var params = {
-      'ranking_type': rankingType,
-      'limit': '$limit',
-      'offset': '$offset'
-    };
+    var params = {'ranking_type': rankingType, 'limit': '$limit', 'offset': '$offset'};
     var json = await _handler.call(uri: uri, params: params);
     var response = RankedResponse.fromJson(json);
     return response.data;
@@ -269,8 +265,7 @@ class Client {
   /// Returns [true] on success.
   Future<bool> updateAnimeList(int id, AnimeListTemplate list) async {
     var uri = "anime/$id/my_list_status";
-    var result =
-        await _handler.call(method: "patch", uri: uri, body: list.toMap());
+    var result = await _handler.call(method: "patch", uri: uri, body: list.toMap());
     return result;
   }
 
@@ -322,8 +317,7 @@ class Client {
   /// Returns [true] on success.
   Future<bool> updateMangaList(int id, MangaListTemplate list) async {
     var uri = "manga/$id/my_list_status";
-    var result =
-        await _handler.call(method: "patch", uri: uri, body: list.toMap());
+    var result = await _handler.call(method: "patch", uri: uri, body: list.toMap());
     return result;
   }
 

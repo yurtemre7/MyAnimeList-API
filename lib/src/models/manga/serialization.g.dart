@@ -6,10 +6,7 @@ part of 'serialization.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Serialization _$SerializationFromJson(Map<String, dynamic> json) {
-  return Serialization(
-    json['node'] == null
-        ? null
-        : SerialNode.fromJson(json['node'] as Map<String, dynamic>),
-  );
-}
+Serialization _$SerializationFromJson(Map<String, dynamic> json) =>
+    Serialization(
+      SerialNode.fromJson(json['node'] as Map<String, dynamic>),
+    );

@@ -36,16 +36,17 @@ class AnimeListTemplate {
   final String tags;
   final String comments;
 
-  AnimeListTemplate(
-      {this.status,
-      this.isRewatching = false,
-      this.score,
-      this.numWatchedEpisodes = 0,
-      this.priority = 0,
-      this.numTimesRewatched = 0,
-      this.rewatchValue = 0,
-      this.tags = "",
-      this.comments = ""});
+  AnimeListTemplate({
+    required this.status,
+    this.isRewatching = false,
+    required this.score,
+    this.numWatchedEpisodes = 0,
+    this.priority = 0,
+    this.numTimesRewatched = 0,
+    this.rewatchValue = 0,
+    this.tags = "",
+    this.comments = "",
+  });
 
   /// Returns map for encoding as form fields.
   Map<String, String> toMap() {

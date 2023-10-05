@@ -6,11 +6,8 @@ part of 'recommendation.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Recommendation _$RecommendationFromJson(Map<String, dynamic> json) {
-  return Recommendation(
-    json['node'] == null
-        ? null
-        : Node.fromJson(json['node'] as Map<String, dynamic>),
-    json['num_recommendations'] as int,
-  );
-}
+Recommendation _$RecommendationFromJson(Map<String, dynamic> json) =>
+    Recommendation(
+      Node.fromJson(json['node'] as Map<String, dynamic>),
+      json['num_recommendations'] as int,
+    );

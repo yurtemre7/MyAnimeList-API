@@ -35,33 +35,33 @@ part 'manga.g.dart';
 class Manga {
   final int id;
   final String title;
-  final MainPicture mainPicture;
-  final AlternativeTitles alternativeTitles;
+  final MainPicture? mainPicture;
+  final AlternativeTitles? alternativeTitles;
 
   @JsonKey(fromJson: stringToDate)
-  final DateTime startDate;
+  final DateTime? startDate;
 
   @JsonKey(fromJson: stringToDate)
-  final DateTime endDate;
+  final DateTime? endDate;
 
-  final String synopsis;
-  final double mean;
-  final int rank;
-  final int popularity;
+  final String? synopsis;
+  final double? mean;
+  final int? rank;
+  final int? popularity;
   final int numListUsers;
   final int numScoringUsers;
-  final String nsfw;
+  final String? nsfw;
 
   @JsonKey(fromJson: stringToDate)
-  final DateTime createdAt;
+  final DateTime? createdAt;
 
   @JsonKey(fromJson: stringToDate)
-  final DateTime updatedAt;
+  final DateTime? updatedAt;
 
   final String mediaType;
   final String status;
   final List<Genre> genres;
-  final MyMangaListStatus myListStatus;
+  final MyMangaListStatus? myListStatus;
   final int numVolumes;
   final int numChapters;
   final List<Author> authors;

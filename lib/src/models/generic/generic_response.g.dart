@@ -6,12 +6,9 @@ part of 'generic_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-GenericResponse _$GenericResponseFromJson(Map<String, dynamic> json) {
-  return GenericResponse(
-    (json['data'] as List)
-        ?.map((e) => e == null
-            ? null
-            : NodeContainer.fromJson(e as Map<String, dynamic>))
-        ?.toList(),
-  );
-}
+GenericResponse _$GenericResponseFromJson(Map<String, dynamic> json) =>
+    GenericResponse(
+      (json['data'] as List<dynamic>)
+          .map((e) => NodeContainer.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
