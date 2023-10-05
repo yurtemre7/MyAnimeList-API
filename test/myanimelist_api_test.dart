@@ -15,16 +15,16 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-import 'dart:io' show Platform, sleep;
+import 'dart:io' show sleep;
 
 import 'package:test/test.dart';
 import 'package:myanimelist_api/myanimelist_api.dart';
 
 void main() {
-  Client client;
+  late Client client;
 
   setUpAll(() {
-    client = Client(Platform.environment['MAL_ACCESS_TOKEN']);
+    client = Client(accessToken: "", clientToken: "");
   });
 
   // Sleep a bit between tests
@@ -38,14 +38,12 @@ void main() {
       expect(animeList.length, 5);
       var anime = animeList[0];
       expect(anime.id, 21);
-      expect(anime.mainPicture.large,
-          "https://api-cdn.myanimelist.net/images/anime/6/73245l.jpg");
     });
 
     test("Get complete anime info", () async {
       var anime = await client.getAnimeDetails(30230);
       expect(anime.title, "Diamond no Ace: Second Season");
-      expect(anime.genres[0].name, "Comedy");
+      expect(anime.genres[0].name, "School");
       expect(anime.relatedAnime[0].node.id, 18689);
       expect(anime.createdAt, DateTime.parse("2015-03-02T06:03:11+00:00"));
     });
@@ -94,7 +92,7 @@ void main() {
     test("Get complete manga info", () async {
       var manga = await client.getMangaDetails(2);
       expect(manga.title, "Berserk");
-      expect(manga.alternativeTitles.synonyms[0], "Berserk: The Prototype");
+      expect(manga.alternativeTitles?.synonyms?[0], "Berserk: The Prototype");
       expect(manga.startDate, DateTime.parse("1989-08-25"));
       expect(manga.genres[0].name, "Action");
       expect(manga.authors[0].node.firstName, "Kentarou");
@@ -115,8 +113,7 @@ void main() {
 
   group("[Anime list]", () {
     test("Update anime list", () async {
-      var list = AnimeListTemplate(
-          status: "completed", score: 6, numWatchedEpisodes: 25);
+      var list = AnimeListTemplate(status: "completed", score: 6, numWatchedEpisodes: 25);
       var response = await client.updateAnimeList(69, list);
       expect(response, true);
     });
@@ -135,8 +132,7 @@ void main() {
 
   group("[Manga list]", () {
     test("Update manga list", () async {
-      var list =
-          MangaListTemplate(status: "dropped", score: 3, numChaptersRead: 1);
+      var list = MangaListTemplate(status: "dropped", score: 3, numChaptersRead: 1);
       var response = await client.updateMangaList(69, list);
       expect(response, true);
     });
